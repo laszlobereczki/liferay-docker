@@ -186,11 +186,15 @@ function compile_product {
 
 	#export ANT_OPTS="$ANT_OPTS -XX:+IgnoreUnrecognizedVMOptions"
 
-	echo "Current ANT_OPTS: $ANT_OPTS"
-	cat build.${USER}.properties
-	ant -diagnostics | grep "build\."
+	#echo "Current ANT_OPTS: $ANT_OPTS"
+	#cat build.${USER}.properties
+	#ant -diagnostics | grep "build\."
 
-	ant -Dbuild.compiler=modern clean compile
+	#ant -Dbuild.compiler=modern clean compile
+
+	cat "${_PROJECTS_DIR}"/liferay-portal-ee/.gradle/gradle.properties
+
+	ant clean compile
 
 }
 
