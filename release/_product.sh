@@ -192,7 +192,9 @@ function compile_product {
 
 	#ant -Dbuild.compiler=modern clean compile
 
-	cat "${_PROJECTS_DIR}"/liferay-portal-ee/.gradle/gradle.properties
+	#cat "${_PROJECTS_DIR}"/liferay-portal-ee/.gradle/gradle.properties
+
+	grep -ri "maxpermsize" "${_PROJECTS_DIR}"/liferay-portal-ee/
 
 	ant clean compile
 
