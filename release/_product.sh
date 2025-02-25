@@ -184,14 +184,14 @@ function compile_product {
 
 	echo "baseline.jar.report.level=off" > "build.${USER}.properties"
 
-	export ANT_OPTS="$ANT_OPTS -XX:+IgnoreUnrecognizedVMOptions"
+	#export ANT_OPTS="$ANT_OPTS -XX:+IgnoreUnrecognizedVMOptions"
 
 	echo "Current ANT_OPTS: $ANT_OPTS"
 	cat build.${USER}.properties
 	ant -diagnostics | grep "build\."
 
+	ant -Dbuild.compiler=modern clean compile
 
-	ant clean compile
 }
 
 function copy_copyright {
