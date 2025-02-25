@@ -41,6 +41,17 @@ function set_jdk_version {
 
 	lc_log INFO "Using JDK ${jdk_version} for release ${_PRODUCT_VERSION}."
 
+	if [[ "$jdk_version" == *"17"* ]]; then
+		JAVA_OPTS=$(echo "$JAVA_OPTS" | sed 's/-XX:MaxPermSize=[^ ]*//g')
+	else
+		if [[ ! "$JAVA_OPTS" =~ "-XX:MaxPermSize" ]]; then
+			JAVA_OPTS="$JAVA_OPTS -XX:MaxPermSize=256m"
+		fi
+	fi
+
+	lc_log INFO "JAVA_OPTS updated for JDK version $jdk_version: $JAVA_OPTS"
+
+	export JAVA_OPTS
 	export JAVA_HOME="/opt/java/${jdk_version}"
 	export PATH="${JAVA_HOME}/bin:${PATH}"
 }
