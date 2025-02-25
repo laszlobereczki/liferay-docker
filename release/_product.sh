@@ -196,7 +196,8 @@ function compile_product {
 
 	#grep -ri "maxpermsize" "${_PROJECTS_DIR}"/liferay-portal-ee/
 
-	sed -i '/db.build.java.maxpermsize=/d' "${_PROJECTS_DIR}"/liferay-portal-ee/build.properties
+	sed -i '/db.build.java.maxpermsize=/Id' "${_PROJECTS_DIR}"/liferay-portal-ee/build.properties
+	grep -ri "maxpermsize" "${_PROJECTS_DIR}"/liferay-portal-ee/
 
 	ant clean compile
 
