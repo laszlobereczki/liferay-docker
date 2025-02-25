@@ -184,6 +184,8 @@ function compile_product {
 
 	echo "baseline.jar.report.level=off" > "build.${USER}.properties"
 
+	echo "Current ANT_OPTS: $ANT_OPTS"
+
 	ant clean compile
 }
 
