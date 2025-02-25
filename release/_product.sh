@@ -194,7 +194,9 @@ function compile_product {
 
 	#cat "${_PROJECTS_DIR}"/liferay-portal-ee/.gradle/gradle.properties
 
-	grep -ri "maxpermsize" "${_PROJECTS_DIR}"/liferay-portal-ee/
+	#grep -ri "maxpermsize" "${_PROJECTS_DIR}"/liferay-portal-ee/
+
+	sed -i '/db.build.java.maxpermsize=/d' "${_PROJECTS_DIR}"/liferay-portal-ee/build.properties
 
 	ant clean compile
 
