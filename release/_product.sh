@@ -50,7 +50,7 @@ function build_product {
 	ant deploy
 
 	echo "LRP-4991: 1 before find $(date)"
-	find /opt/dev/projects/github/liferay-portal-ee/.gradle/caches/modules-2/files-2.1/com.liferay/com.liferay.portal.license.enterprise.app
+	find /opt/dev/projects/github/liferay-portal-ee/.gradle/caches/modules-2/files-2.1/com.liferay/com.liferay.portal.license.enterprise.app || true
 	echo "LRP-4991: 2 after find $(date)"
 	ant deploy-portal-license-enterprise-app
 	echo "LRP-4991: 3 after command $(date)"
