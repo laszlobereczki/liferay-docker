@@ -49,6 +49,8 @@ function build_product {
 
 	ant deploy
 
+	find /opt/dev/projects/github/liferay-portal-ee/.gradle/caches/modules-2/files-2.1
+
 	ant deploy-portal-license-enterprise-app
 
 	lc_cd "${_PROJECTS_DIR}"/liferay-portal-ee/modules
