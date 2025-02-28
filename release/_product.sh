@@ -185,7 +185,6 @@ function compile_product {
 	echo "baseline.jar.report.level=off" > "build.${USER}.properties"
 
 	ant clean compile
-
 }
 
 function copy_copyright {
