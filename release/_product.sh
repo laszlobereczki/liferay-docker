@@ -49,12 +49,7 @@ function build_product {
 
 	ant deploy
 
-	echo "LRP-4991: 1 before find $(date)"
-	find /opt/dev/projects/github/liferay-portal-ee/.gradle/caches/modules-2/files-2.1/com.liferay | grep license
-	find /opt/dev/projects/github/liferay-binaries-cache-2020/.gradle/caches/modules-2/files-2.1/com.liferay | grep license
-	echo "LRP-4991: 2 after find $(date)"
 	ant deploy-portal-license-enterprise-app
-	echo "LRP-4991: 3 after command $(date)"
 
 	lc_cd "${_PROJECTS_DIR}"/liferay-portal-ee/modules
 
@@ -188,24 +183,6 @@ function compile_product {
 	lc_cd "${_PROJECTS_DIR}/liferay-portal-ee"
 
 	echo "baseline.jar.report.level=off" > "build.${USER}.properties"
-
-	#export ANT_OPTS="$ANT_OPTS -XX:+IgnoreUnrecognizedVMOptions"
-
-	#echo "Current ANT_OPTS: $ANT_OPTS"
-	#cat build.${USER}.properties
-	#ant -diagnostics | grep "build\."
-
-	#ant -Dbuild.compiler=modern clean compile
-
-	#cat "${_PROJECTS_DIR}"/liferay-portal-ee/.gradle/gradle.properties
-
-	#grep -ri "maxpermsize" "${_PROJECTS_DIR}"/liferay-portal-ee/
-
-	#sed -i '/db.build.java.maxpermsize=/Id' "${_PROJECTS_DIR}"/liferay-portal-ee/build.properties
-	#sed -i 's/-XX:MaxPermSize=${db.build.java.maxpermsize}/-XX:MaxMetaspaceSize=${db.build.java.maxpermsize}/g' "${_PROJECTS_DIR}"/liferay-portal-ee/sql/build-parent.xml
-
-	env | grep erm
-	#grep -ri "maxpermsize" "${_PROJECTS_DIR}"/liferay-portal-ee/
 
 	ant clean compile
 
