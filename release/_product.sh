@@ -58,7 +58,7 @@ function build_product {
 			ls -lah /opt/dev/projects/github/liferay-portal-ee/.gradle/caches/modules-2/files-2.1/com.liferay/com.liferay.portal.license.enterprise.app/1.0.14/f58c472579e535c5d4f0cd10b75352cc38be25b4/ || echo "folder ls would fail"
 			stat /opt/dev/projects/github/liferay-portal-ee/.gradle/caches/modules-2/files-2.1/com.liferay/com.liferay.portal.license.enterprise.app/1.0.14/f58c472579e535c5d4f0cd10b75352cc38be25b4/com.liferay.portal.license.enterprise.app-1.0.14.jar || echo "stat would fail"
 			find /opt/dev/projects/github/liferay-portal-ee/.gradle/caches/modules-2/files-2.1/com.liferay -type f -name "com.liferay.portal.license.enterprise.app-1.0.14.jar"
-			ls -lah /proc/$(pgrep -f java | head -n 1)/fd | grep "com.liferay.portal.license.enterprise.app-1.0.14.jar"
+			ls -lah /proc/$(pgrep -f java | head -n 1)/fd | grep "com.liferay.portal.license.enterprise.app-1.0.14.jar" || echo "ls + grep would fail"
 			jcmd $(pgrep -f java | head -n 1) VM.flags
 			jcmd $(pgrep -f java | head -n 1) GC.heap_info
 			jcmd $(pgrep -f java | head -n 1) VM.uptime
