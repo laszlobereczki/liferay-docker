@@ -50,31 +50,24 @@ function build_product {
 	ant deploy
 
 			echo "===== START DEBUG INFO ====="
-            echo "Timestamp: $(date)"
-            uname -a || echo "uname command not found"
-            uptime || echo "uptime command not found"
-            df -h || echo "df command not found"
-            df -i || echo "df command not found"
-            echo "Checking if file exists before processing:"
-            ls -lah /opt/dev/projects/github/liferay-portal-ee/.gradle/caches/modules-2/files-2.1 || echo "File not found"
-            echo "Checking file permissions:"
-            ls -ld /opt/dev/projects/github/liferay-portal-ee/.gradle/caches/modules-2/files-2.1 || echo "Directory not found"
-            echo "Checking open file handles:"
-            command -v lsof >/dev/null && lsof | grep "/opt/dev/projects/github/liferay-portal-ee/.gradle" || echo "lsof command not found or no open handles"
-            echo "Java processes running:"
-            ps aux | grep java || echo "No Java processes found"
-            echo "Gradle processes running:"
-            ps aux | grep gradle || echo "No Gradle processes found"
-            echo "Checking mount points:"
-            mount | grep cgroup || echo "No cgroup mount points found"
-            mount | grep "/opt/dev/projects/github/liferay-portal-ee" || echo "Mount point not found"
-            echo "Checking cgroups for the current process:"
-            cat /proc/self/cgroup || echo "cgroup info not available"
-            echo "Checking recent Docker events:"
-            command -v docker >/dev/null && docker events --since 10m || echo "Docker command not found or no recent events"
-            echo "Checking JVM memory:"
-            jcmd $(pgrep -f java | head -n 1) VM.flags || echo "jcmd command failed"
-            jcmd $(pgrep -f java | head -n 1) GC.heap_info || echo "jcmd command failed"
+			echo "Timestamp: $(date)"
+			uname -a
+			uptime
+			df -h
+			df -i
+			ls -lah /opt/dev/projects/github/liferay-portal-ee/.gradle/caches/modules-2/files-2.1/com.liferay/com.liferay.portal.license.enterprise.app/1.0.14/f58c472579e535c5d4f0cd10b75352cc38be25b4/
+			stat /opt/dev/projects/github/liferay-portal-ee/.gradle/caches/modules-2/files-2.1/com.liferay/com.liferay.portal.license.enterprise.app/1.0.14/f58c472579e535c5d4f0cd10b75352cc38be25b4/com.liferay.portal.license.enterprise.app-1.0.14.jar
+			find /opt/dev/projects/github/liferay-portal-ee/.gradle/caches/modules-2/files-2.1/com.liferay -type f -name "com.liferay.portal.license.enterprise.app-1.0.14.jar"
+			ls -lah /proc/$(pgrep -f java | head -n 1)/fd | grep "com.liferay.portal.license.enterprise.app-1.0.14.jar"
+			jcmd $(pgrep -f java | head -n 1) VM.flags
+			jcmd $(pgrep -f java | head -n 1) GC.heap_info
+			jcmd $(pgrep -f java | head -n 1) VM.uptime
+			ps aux | grep java
+			ps aux | grep gradle
+			inotifywait -m -r -e delete,delete_self,move /opt/dev/projects/github/liferay-portal-ee/.gradle/caches/modules-2/files-2.1/com.liferay &
+			docker ps
+			docker events --since 10m &
+
             echo "===== RUNNING PROCESS ====="
             ant deploy-portal-license-enterprise-app || echo "ant command failed"
             echo "Checking if file exists after processing:"
