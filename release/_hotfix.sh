@@ -461,11 +461,15 @@ function prepare_release_dir {
 
 	if [ -n "${release7z}" ]
 	then
-		7z x "${release7z}"
+		echo "Testing archive integrity: ${release7z}"
+		7z t "${release7z}" || { echo "Archive integrity check failed!"; return ${LIFERAY_COMMON_EXIT_CODE_BAD}; }
+		7z x "${release7z}" || { echo "Extraction failed!"; return ${LIFERAY_COMMON_EXIT_CODE_BAD}; }
 	else
 		lc_download "https://releases-cdn.liferay.com/dxp/${_PRODUCT_VERSION}/$(lc_curl "https://releases-cdn.liferay.com/dxp/${_PRODUCT_VERSION}/.lfrrelease-tomcat-bundle")" liferay-dxp.7z
 
-		7z x ./liferay-dxp.7z
+		echo "Testing downloaded archive integrity."
+		7z t ./liferay-dxp.7z || { echo "Downloaded archive integrity check failed!"; return ${LIFERAY_COMMON_EXIT_CODE_BAD}; }
+		7z x ./liferay-dxp.7z || { echo "Extraction of downloaded archive failed!"; return ${LIFERAY_COMMON_EXIT_CODE_BAD}; }
 
 		rm -f ./liferay-dxp.7z
 	fi
