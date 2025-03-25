@@ -214,9 +214,7 @@ files_liferay_com/private/ee/portal/hotfix/${_PRODUCT_VERSION}/${_HOTFIX_FILE_NA
 	fi
 
 	gsutil cp "${_BUILD_DIR}/${_HOTFIX_FILE_NAME}" "${_GCS_HOTFIX_BUCKET_DIR}"
-	lc_log INFO "Successfully uploaded ${_HOTFIX_FILE_NAME} to ${_GCS_HOTFIX_BUCKET_DIR}"
-
-	echo -e "# Uploaded\n - ${_GCS_HOTFIX_CONSOLE_URL}" > ../output.md
+	lc_log INFO "Hotfix successfully uploaded: ${_GCS_HOTFIX_CONSOLE_URL}"
 }
 
 function upload_release {
