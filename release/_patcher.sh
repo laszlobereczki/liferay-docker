@@ -26,8 +26,6 @@ function report_jenkins_url {
 	) > "${LIFERAY_RELEASE_HOTFIX_BUILD_ID}"
 
 	rsync -Dlprtvz --chown=501:501 --no-perms "${_BUILD_DIR}"/patcher-status/ /mnt/patcher-shared/patcher/
-
-	#ssh test-3-1 "chown -R 501:501 /mnt/mfs-hdd1-172.16.168/patcher"
 }
 
 function report_patcher_status {
@@ -53,6 +51,4 @@ function report_patcher_status {
 	cat "${LIFERAY_RELEASE_HOTFIX_BUILD_ID}"
 
 	rsync -Dlprtvz --chown=501:501 --no-perms "${_BUILD_DIR}"/patcher-status/ /mnt/patcher-shared/patcher/
-
-	#ssh test-3-1 "chown -R 501:501 /mnt/mfs-hdd1-172.16.168/patcher"
 }
